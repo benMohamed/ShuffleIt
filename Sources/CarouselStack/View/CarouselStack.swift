@@ -135,9 +135,7 @@ public struct CarouselStack<Data: RandomAccessCollection, Content: View>: View {
         .disabled(autoSliding)
         .onChange(of: isActiveGesture) { value in
             if !isActiveGesture {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.02) {
-                    performRestoring()
-                }
+                performRestoring()
             }
         }
         #if canImport(UtilsForTest)
@@ -155,7 +153,8 @@ public struct CarouselStack<Data: RandomAccessCollection, Content: View>: View {
         if disabled {
             mainContent
         } else {
-            mainContent.gesture(dragGesture)
+            mainContent
+                .simultaneousGesture(dragGesture)
         }
         #endif
     }

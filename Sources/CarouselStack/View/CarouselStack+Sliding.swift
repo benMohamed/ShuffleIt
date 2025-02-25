@@ -6,7 +6,7 @@ extension CarouselStack {
         self.autoSliding = true
         self.direction = direction
         performMovingToMiddle()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.21) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             self.performRestoring()
         }
     }
@@ -14,7 +14,7 @@ extension CarouselStack {
     /// A method that mimics sliding behaviour to slide view to left or right for the purpose of programmatic sliding.
     internal func performMovingToMiddle() {
         let maXSwipeDistance = size.width * 0.75
-        withAnimation(animation.timing(duration: 0.21)) {
+        withAnimation(animation.timing(duration: 0.1)) {
             switch direction {
             case .left:
                 xPosition = maXSwipeDistance
@@ -26,7 +26,7 @@ extension CarouselStack {
     
     /// A method that performs to restore content views, which have already been in the middle of sliding in the process of sliding, to the original position.
     internal func performRestoring() {
-        let maxSwipeDistance = size.width * 0.5
+        let maxSwipeDistance = size.width * 0.1
         if xPosition > 0 {
             let newIndex: Data.Index?
             switch style {
@@ -44,13 +44,13 @@ extension CarouselStack {
                 )
                 index = newIndex
                 direction = .right
-                withAnimation(animation.timing(duration: duration(0.07))) {
+                withAnimation(animation.timing(duration: duration(0.1))) {
                     xPosition = 0
                     autoSliding = false
                 }
                 notifyListener(context: context)
             } else {
-                withAnimation(animation.timing(duration: duration(0.05))) {
+                withAnimation(animation.timing(duration: duration(0.1))) {
                     xPosition = 0
                 }
             }
@@ -71,13 +71,13 @@ extension CarouselStack {
                 )
                 index = newIndex
                 direction = .left
-                withAnimation(animation.timing(duration: duration(0.07))) {
+                withAnimation(animation.timing(duration: duration(0.1))) {
                     xPosition = 0
                     autoSliding = false
                 }
                 notifyListener(context: context)
             } else {
-                withAnimation(animation.timing(duration: duration(0.05))) {
+                withAnimation(animation.timing(duration: duration(0.1))) {
                     xPosition = 0
                 }
             }
