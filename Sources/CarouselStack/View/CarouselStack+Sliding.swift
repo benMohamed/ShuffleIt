@@ -14,7 +14,7 @@ extension CarouselStack {
     /// A method that mimics sliding behaviour to slide view to left or right for the purpose of programmatic sliding.
     internal func performMovingToMiddle() {
         let maXSwipeDistance = size.width * 0.75
-        withAnimation(animation.timing(duration: 0.21)) {
+        withAnimation(animation.timing(duration: 0.01)) {
             switch direction {
             case .left:
                 xPosition = maXSwipeDistance
