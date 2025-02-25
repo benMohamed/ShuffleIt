@@ -44,13 +44,13 @@ extension CarouselStack {
                 )
                 index = newIndex
                 direction = .right
-                withAnimation(animation.timing(duration: duration(0.07))) {
+                withAnimation(animation.timing(duration: duration(0.01))) {
                     xPosition = 0
                     autoSliding = false
                 }
                 notifyListener(context: context)
             } else {
-                withAnimation(animation.timing(duration: duration(0.05))) {
+                withAnimation(animation.timing(duration: duration(0.01))) {
                     xPosition = 0
                 }
             }
@@ -71,13 +71,13 @@ extension CarouselStack {
                 )
                 index = newIndex
                 direction = .left
-                withAnimation(animation.timing(duration: duration(0.07))) {
+                withAnimation(animation.timing(duration: duration(0.01))) {
                     xPosition = 0
                     autoSliding = false
                 }
                 notifyListener(context: context)
             } else {
-                withAnimation(animation.timing(duration: duration(0.05))) {
+                withAnimation(animation.timing(duration: duration(0.01))) {
                     xPosition = 0
                 }
             }
