@@ -17,7 +17,7 @@ struct CarouselStackDemoView: View {
             CarouselStack(sneakers, initialIndex: 0) { sneaker, translation in
                 SneakerCard(sneaker: sneaker, translation: translation)
             }
-            .carouselScale(0.7)
+            .carouselScale(1)
             .carouselPadding(horizontalSizeClass == .compact ? 20 : 40)
             .carouselSpacing(horizontalSizeClass == .compact ? 10 : 30)
             .carouselStyle(.infiniteScroll)
@@ -34,47 +34,6 @@ struct CarouselStackDemoView: View {
             }
             .carouselTrigger(on: carouselPublisher)
             .carouselAnimation(.easeInOut)
-            if let sneaker = sneaker, isShowItems {
-                Text("Explore in \(sneaker.title)")
-                    .font(.title.bold())
-                    .animation(.none)
-                    .transition(AnyTransition.slide.combined(with: .opacity))
-                    .padding(.horizontal, 20)
-            }
-            if let sneaker = sneaker, isShowItems {
-                ScrollView {
-                    Group {
-                        if horizontalSizeClass == .compact {
-                            LazyVStack(alignment: .leading) {
-                                ForEach(sneaker.items) { item in
-                                    SneakerItemRow(item: item)
-                                }
-                            }
-                        } else {
-                            LazyVGrid(columns: columns) {
-                                ForEach(sneaker.items) { item in
-                                    SneakerItemRow(item: item)
-                                }
-                            }
-                        }
-                    }
-                    .padding(.horizontal, 20)
-                    .animation(.none, value: sneaker.id)
-                }
-                .transition(AnyTransition.move(edge: .bottom).combined(with: .opacity))
-                .modifier(DragGestureViewModifier(onEnd: { value in
-                    switch(value.translation.width, value.translation.height) {
-                    case (...0, -30...30):
-                        carouselPublisher.send(.right)
-                    case (0..., -30...30):
-                        carouselPublisher.send(.left)
-                    default: break
-                    }
-                }))
-                .padding(.bottom, 20)
-            } else {
-                Spacer()
-            }
         }
         .background {
             if let sneaker = sneaker {
