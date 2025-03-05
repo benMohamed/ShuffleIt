@@ -135,9 +135,7 @@ public struct CarouselStack<Data: RandomAccessCollection, Content: View>: View {
         .disabled(autoSliding)
         .onChange(of: isActiveGesture) { value in
             if !isActiveGesture {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.02) {
-                    performRestoring()
-                }
+                performRestoring()
             }
         }
         #if canImport(UtilsForTest)

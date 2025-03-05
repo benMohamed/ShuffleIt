@@ -44,8 +44,6 @@ struct SneakerCard: View {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 180, height: 180)
-                .rotationEffect(.degrees(-40 * Double(1 - translation)))
-                .offset(x: -20 * Double(1 - translation))
             Text(sneaker.title)
                 .font(.title.bold())
                 .offset(y: -15)
@@ -63,8 +61,6 @@ struct SneakerCard: View {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 300, height: 300)
-                .rotationEffect(.degrees(-40 * Double(1 - translation)))
-                .offset(x: -40 * Double(1 - translation))
             VStack(alignment: .leading, spacing: 0) {
                 Text(sneaker.title)
                     .font(.system(size: 60).bold())

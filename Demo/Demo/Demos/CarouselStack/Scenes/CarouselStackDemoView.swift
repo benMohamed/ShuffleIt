@@ -20,38 +20,7 @@ struct CarouselStackDemoView: View {
             .carouselScale(1)
             .carouselPadding(horizontalSizeClass == .compact ? 20 : 40)
             .carouselSpacing(horizontalSizeClass == .compact ? 10 : 30)
-            .carouselStyle(.infiniteScroll)
             .onCarousel { context in
-                withAnimation(.easeInOut(duration: 0.2)) {
-                    isShowItems = false
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                    withAnimation(.easeInOut(duration: 0.2)) {
-                        sneaker = sneakers[context.index]
-                        isShowItems = true
-                    }
-                }
-            }
-            .carouselTrigger(on: carouselPublisher)
-            .carouselAnimation(.easeInOut)
-        }
-        .background {
-            if let sneaker = sneaker {
-                GeometryReader { proxy in
-                    ZStack {
-                        Circle()
-                            .scale(1.1, anchor: .bottomTrailing)
-                            .position(x: proxy.size.width, y: proxy.size.height / 2.5)
-                            .foregroundColor(Color(hex: sneaker.theme.tertiary).opacity(0.3))
-                        Circle()
-                            .scale(0.7, anchor: .bottomTrailing)
-                            .position(x: 0, y: proxy.size.height)
-                            .foregroundColor(Color(hex: sneaker.theme.primary).opacity(0.45))
-                    }
-                    .blur(radius: 40)
-                    .background(.white)
-                    .ignoresSafeArea()
-                }
             }
         }
         .onAppear {
