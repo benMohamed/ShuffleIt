@@ -11,9 +11,26 @@ struct CarouselStackDemoView: View {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     let columns: [GridItem] = .init(repeating: GridItem(.flexible(), spacing: 20, alignment: .leading), count: 2)
     let sneakers: [Sneaker] = .sneakers()
-    
+    @State private var currentIndex: Int = 0
+
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
+            GeometryReader { geometry in
+                let cardWidth: CGFloat = geometry.size.width // 70% of screen width
+                let spacing: CGFloat = 10
+                
+                TabView(selection: $currentIndex) {
+                    ForEach(sneakers.indices, id: \.self) { index in
+                        SneakerCard(sneaker: sneakers[index], translation: 1.0)
+                            .frame(width: cardWidth)
+                            .animation(.easeInOut, value: currentIndex)
+                            .tag(index)
+                    }
+                }
+                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never)) // Remove default page dots
+                .padding(.horizontal, (geometry.size.width - cardWidth) / 2) // Center the first card
+            }
+
             CarouselStack(sneakers, initialIndex: 0) { sneaker, translation in
                 SneakerCard(sneaker: sneaker, translation: translation)
             }
