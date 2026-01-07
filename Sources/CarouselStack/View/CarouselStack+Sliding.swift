@@ -6,7 +6,7 @@ extension CarouselStack {
         self.autoSliding = true
         self.direction = direction
         performMovingToMiddle()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             self.performRestoring()
         }
     }
